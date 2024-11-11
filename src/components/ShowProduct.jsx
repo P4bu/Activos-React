@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, getDoc, deleteDoc, doc } from 'firebase/firestore'
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig/firebase'
 import  CreateProduct  from './CreateProduct'
+import EditProduct from "./EditProduct";
 
-import { BrowserRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -54,7 +53,8 @@ const ShowProduct = () => {
         MySwal.fire({
             title: "Crear Producto",
             html: (
-                 <CreateProduct onProductCreated={() => navigate('/')} />
+                 <CreateProduct  
+                 getProductos = {getProductos}/>
             ),
             focusConfirm: false,
             showCancelButton: false,
@@ -65,6 +65,27 @@ const ShowProduct = () => {
             },
         });
     };
+
+    const editarProducto = (id) => {
+        
+        MySwal.fire({
+            title: "Editar Producto",
+            html: (
+                 <EditProduct
+                 id={id}
+                 getProductos = {getProductos}
+                 />
+            ),
+            focusConfirm: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            cancelButtonText: '',
+            confirmButtonText: '',
+            preConfirm: () => {
+            },
+        });
+    };
+
 
     // funcion para eliminar
     const deleteProducto = async (id) => {
@@ -180,9 +201,9 @@ const ShowProduct = () => {
                                     <td>{producto.sector}</td>
                                     <td>{producto.estado}</td>
                                     <td>
-                                        <Link to={`/EditProduct/${producto.id}`} className='btn btn-warning'><i class="fa-solid fa-pen-to-square">Editar</i></Link>
-                                        <button onClick={() => confirmDelete(producto.id)} class='btn btn-danger'>Eliminar</button>
-                                        <button onClick={() => agregarSalida(producto.id)} class='btn btn-success'>Salida</button>
+                                        <button onClick={() => editarProducto(producto.id)} className='btn btn-warning'>Editar</button>
+                                        <button onClick={() => confirmDelete(producto.id)} className='btn btn-danger'>Eliminar</button>
+                                        <button onClick={() => agregarSalida(producto.id)} className='btn btn-success'>Salida</button>
                                     </td>
                                 </tr>
                             )

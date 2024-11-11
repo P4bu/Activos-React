@@ -6,7 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
 
-const CreateProduct = ({ onProductCreated }) => {
+const CreateProduct = ({ getProductos }) => {
   const [activo_fijo, setActivo_fijo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [estado, setEstado] = useState('');
@@ -33,13 +33,13 @@ const CreateProduct = ({ onProductCreated }) => {
         serie: data.serie,
       });
 
-      Swal.fire('Producto creado!', '', 'success');
+      Swal.fire('¡Activo añadido con exito!', 'Su activo fue ingresado con exito', 'success');
       
       // Llamar a la función onProductCreated después de crear el producto
-      onProductCreated();
+      getProductos();
 
       // Cerrar el modal
-      MySwal.close();
+      //MySwal.close();
     } catch (error) {
       console.error('Hubo un error', error);
       Swal.fire('Error', 'Hubo un problema al guardar el producto. Inténtalo de nuevo.', 'error');
