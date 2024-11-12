@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 import { ExportExcel } from '../utils/ExportExcel'; 
+import { handleImportExcel, handleFileChange } from '../utils/ImportExcel';
 
 const MySwal = withReactContent(Swal)
 
@@ -158,6 +159,20 @@ const ShowProduct = () => {
                     className='btn btn-primary mt-2 mb-2'>
                     Exportar a Excel
                 </button>
+
+                <input
+                    type="file"
+                    accept=".xlsx, .xls"
+                    onChange={(e) => handleFileChange(e, setProductos)} // Usamos handleFileChange                        className="btn btn-secondary mt-2 mb-2"
+                />
+
+                <button
+                    className="btn btn-success"
+                    onClick={() => handleImportExcel(productos)} // Llamamos a handleImportExcel
+                >
+                    Importar Excel
+                </button>
+
                 <table className='table table-light table-hover'>
                     <thead>
                         <tr>
