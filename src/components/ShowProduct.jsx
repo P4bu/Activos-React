@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import { ExportExcel } from '../utils/ExportExcel'; 
+
 const MySwal = withReactContent(Swal)
 
 const ShowProduct = () => {
@@ -151,7 +153,11 @@ const ShowProduct = () => {
                 <div className='d-grid gap-2'>
                     <button onClick={agregarProducto} className='btn btn-success mt-2 mb-2'>Añadir Activo</button>
                 </div>
-
+                <button 
+                    onClick={() => ExportExcel(productos)} 
+                    className='btn btn-primary mt-2 mb-2'>
+                    Exportar a Excel
+                </button>
                 <table className='table table-light table-hover'>
                     <thead>
                         <tr>
